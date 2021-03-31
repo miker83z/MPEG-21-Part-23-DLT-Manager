@@ -1,0 +1,19 @@
+{
+  "name": "eth-smart-contract-generator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miker83z/fantastic-memory.git"
+  },
+  "author": "Mirko Zichichi <mikerz83@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miker83z/fantastic-memory/issues"
+  },
+  "homepage": "https://github.com/miker83z/fantastic-memory#readme"
+}
