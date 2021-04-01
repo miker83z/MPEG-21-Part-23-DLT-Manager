@@ -1,0 +1,10 @@
+{
+  "http://mpeg.org/PerformingRighthsOrganisation": "0x8023C91eF291328e7bD34f5419103c23aCc0C1f8",
+  "http://mpeg.org/Aggregator": "0x699367D18694bb754A12B0AdF98351aC2A1ceD03",
+  "http://mpeg.org/Author": "0xD1B1838499C42aD04756D4124204263244445AE8",
+  "http://mpeg.org/Publisher": "0xd485c90D0b573D134081567398E67F4ae28032A2",
+  "http://mpeg.org/MechanicalLicenseAgent": "0xBaC339F877B1b4B38fC52c8238D6Cf06BBf55c53",
+  "http://mpeg.org/RecordLabel": "0x6c6bBbEb9286AAc90f974cAaC09c0e9297088893",
+  "http://mpeg.org/StreamingService": "0x9Ea8671E9924Aa9b6188e828cA022Cb710c4F21C",
+  "http://mpeg.org/Consumer": "0x38d96b0558d0c9E2FA5dCC28b3eC827Ee44452Aa"
+}
