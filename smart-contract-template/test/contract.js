@@ -15,7 +15,22 @@ contract('Contract', (accounts) => {
 
     const dlist = [resTok.logs[0].args.tokenId];
     const olist = [new web3.utils.BN(2)];
-    const rlist = [];
+    const relatContList = [accounts[0]];
+    const relationsList = [new web3.utils.BN(1)]; //enums
+    const incomeBeneficiariesList = [
+      accounts[2],
+      accounts[4],
+      accounts[5],
+      accounts[3],
+      accounts[6],
+    ];
+    const incomePercentagesList = [
+      new web3.utils.BN(2),
+      new web3.utils.BN(1),
+      new web3.utils.BN(50),
+      new web3.utils.BN(1),
+      new web3.utils.BN(20),
+    ];
     const contentUri = mco.contracts[0];
     const contentHash = web3.utils.asciiToHex(contentUri);
 
@@ -25,18 +40,20 @@ contract('Contract', (accounts) => {
       token.address,
       dlist,
       olist,
-      rlist,
-      rlist,
+      relatContList,
+      relationsList,
+      incomeBeneficiariesList,
+      incomePercentagesList,
       contentUri,
       contentHash,
       {
         from: owner,
-        gas: '2500000',
+        gas: '6000000',
       }
     );
 
-    const a = await cont.getDeonticExpressions();
-    const b = await cont.getParties();
+    //const a = await cont.getDeonticExpressions();
+    const b = await cont.getIncomePercentagesBy(accounts[2]);
     console.log(b);
   });
 });

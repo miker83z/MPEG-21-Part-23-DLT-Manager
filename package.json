@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/miker83z/fantastic-memory/issues"
   },
-  "homepage": "https://github.com/miker83z/fantastic-memory#readme"
+  "homepage": "https://github.com/miker83z/fantastic-memory#readme",
+  "dependencies": {
+    "web3": "^1.3.4"
+  }
 }
