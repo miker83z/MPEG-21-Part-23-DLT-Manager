@@ -1,9 +1,11 @@
+const { generateMediaSmartContract } = require('./lib/generator');
 const { OffChainStorage } = require('./lib/offChainStorage');
-const { SmartContractGenerator } = require('./lib/generator');
+const { SmartContractDeployer } = require('./lib/deployer');
 const { SmartContractParser } = require('./lib/parser');
 
 module.exports = {
+  generateMediaSmartContract,
   OffChainStorage,
-  SmartContractGenerator,
+  SmartContractDeployer,
   SmartContractParser,
 };
