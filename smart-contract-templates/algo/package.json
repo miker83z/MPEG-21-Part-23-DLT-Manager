@@ -1,0 +1,17 @@
+{
+  "name": "algorandscm",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mirko Zichichi <mikerz83@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@algo-builder/algob": "^1.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4"
+  }
+}

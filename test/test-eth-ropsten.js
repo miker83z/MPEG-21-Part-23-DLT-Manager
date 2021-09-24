@@ -1,8 +1,8 @@
 const {
-  generateMediaSmartContract,
+  generateSmartContractSpecification,
   OffChainStorage,
-  SmartContractDeployer,
-  SmartContractParser,
+  EthereumDeployer,
+  EthereumParser,
 } = require('./..');
 const mco = require('./example.json');
 const bindings = require('./bindings.json');
@@ -14,38 +14,19 @@ const infuraKey = secret.substr(0, secret.indexOf(' '));
 const mnemonic = secret.substr(secret.indexOf(' ')).trim();
 
 const generate = () => {
-  return generateMediaSmartContract(mco);
+  return generateSmartContractSpecification(mco);
 };
 
-const deploy = async (mediaSC) => {
-  const ipfs = new OffChainStorage();
-  const deployer = new SmartContractDeployer(
-    'http://127.0.0.1:8545',
-    ipfs,
-    mediaSC,
-    bindings
-  );
-  await deployer.setMainAddress(0);
-  const res = await deployer.deploySmartContracts();
-  return res.options.address;
-};
-
-const parse = async (address) => {
-  const ipfs = new OffChainStorage();
-  const pars = new SmartContractParser('http://127.0.0.1:8545', ipfs, address);
-  return await pars.parseSmartContract();
-};
-
-const deployRopsten = async (mediaSC) => {
+const deployRopsten = async (smartContractSpecification) => {
   const ropstenProvider = new HDWalletProvider(
     mnemonic,
     `https://ropsten.infura.io/v3/` + infuraKey
   );
   const ipfs = new OffChainStorage();
-  const deployer = new SmartContractDeployer(
+  const deployer = new EthereumDeployer(
     ropstenProvider,
     ipfs,
-    mediaSC,
+    smartContractSpecification,
     bindings,
     3
   );
@@ -56,7 +37,7 @@ const deployRopsten = async (mediaSC) => {
 
 const parseRopsten = async (address) => {
   const ipfs = new OffChainStorage();
-  const pars = new SmartContractParser(
+  const pars = new EthereumParser(
     `https://ropsten.infura.io/v3/` + infuraKey,
     ipfs,
     address,
@@ -66,18 +47,13 @@ const parseRopsten = async (address) => {
 };
 
 const mainRopsten = async () => {
-  const mediaSC = generate();
-  //const address = await deployRopsten(mediaSC);
+  const smartContractSpecification = generate();
+  //const address = await deployRopsten(smartContractSpecification);
+  await sleep(2000);
   const res = await parseRopsten('0xD55e47986E5C990a691edcf04436d35253d2bE2B');
   console.log(res);
 };
 
-const main = async () => {
-  const mediaSC = generate();
-  //const address = await deploy(mediaSC);
-  const address = '0x9e0B0f5E7DF524cbe3BfbfAB3E733F1a7232ccB9';
-  const res = await parseRopsten(address);
-  console.log(res);
-};
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 main();

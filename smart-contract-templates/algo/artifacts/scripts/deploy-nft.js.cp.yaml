@@ -1,0 +1,14 @@
+default:
+    timestamp: 1632503423733
+    metadata: {}
+    asa: {}
+    ssc:
+        nft_approval.py-nft_clear_state.py:
+            1632503424:
+                creator: WWYNX3TKQYVEREVSW6QQP3SXSFOCE3SKUSEIVJ7YAGUPEACNI5UGI4DZCE
+                txId: 6URZQDDQHKADUKGJFG7M2JF7PRVQENHG3MZ7B6LQBWWLCSJ357NA
+                confirmedRound: 1900
+                appID: 8
+                timestamp: 1632503424
+                deleted: false
+    dLsig: {}

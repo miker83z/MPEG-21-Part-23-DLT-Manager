@@ -1,0 +1,27 @@
+filename: fee-check.teal
+timestamp: 1631731148
+compiled: AiABkE4xASIPMSAyAxIQMQkyAxIQ
+compiledHash: DVBPKB6YOW35LKMTLTVO3ML7G7V5QIB3SAXGUNY6CIW6H7IN7JV73MR7TQ
+srcHash: 4082511177
+base64ToBytes:
+    - 2
+    - 32
+    - 1
+    - 144
+    - 78
+    - 49
+    - 1
+    - 34
+    - 15
+    - 49
+    - 32
+    - 50
+    - 3
+    - 18
+    - 16
+    - 49
+    - 9
+    - 50
+    - 3
+    - 18
+    - 16
