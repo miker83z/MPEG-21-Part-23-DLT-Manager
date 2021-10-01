@@ -1,14 +1,14 @@
 default:
-    timestamp: 1632763305977
+    timestamp: 1633111834386
     metadata: {}
     asa: {}
     ssc:
         main_approval.py-main_clear_state.py:
-            1632763306:
+            1633111834:
                 creator: WWYNX3TKQYVEREVSW6QQP3SXSFOCE3SKUSEIVJ7YAGUPEACNI5UGI4DZCE
-                txId: AAFGXKEQ7KNKEG4WCL2LSWNPM7VYGRMLSFRT5TFEJKTYIDSIIQBQ
-                confirmedRound: 187
-                appID: 8
-                timestamp: 1632763306
+                txId: FHJ3FCLZRELBE4HCADDU3E6VKQVUZD67LLNQBLGBUNI4CEXXN3EQ
+                confirmedRound: 2405
+                appID: 68
+                timestamp: 1633111834
                 deleted: false
     dLsig: {}

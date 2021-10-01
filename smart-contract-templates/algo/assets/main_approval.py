@@ -2,18 +2,50 @@ from pyteal import *
 
 
 def approval_program():
-    content = Bytes("total")
-    var_1 = Int(1)
+    creator = Bytes("creator")
+    contentUri = Bytes("contentUri")
+    contentHash = Bytes("contentHash")
+    totNFT = Bytes("totNFT")
+    concatenatedNFTsID = Bytes("concatenatedNFTsID")
 
     on_deployment = Seq([
-        App.globalPut(Bytes("creator"), Txn.sender()),
-        #Assert(Txn.application_args.length() == Int(1)),
-        App.globalPut(content, Txn.application_args[0]),
-        Return(var_1)
+        Assert(Txn.application_args.length() == Int(4)),
+        App.globalPut(creator, Txn.sender()),
+        App.globalPut(contentUri, Txn.application_args[0]),
+        App.globalPut(contentHash, Txn.application_args[1]),
+        App.globalPut(totNFT, Txn.application_args[2]),
+        App.globalPut(concatenatedNFTsID, Txn.application_args[3]),
+        Return(Int(1))
+    ])
+
+    set_income_benef_num = Seq([
+        Assert(Txn.application_args.length() == Int(2)),
+        Assert(Txn.accounts.length() == Int(1)),
+        App.localPut(
+            Int(1),
+            Bytes('beneficiaries_num'),
+            Btoi(Txn.application_args[1])
+        ),
+        Return(Int(1))
+    ])
+
+    set_income_benef = Seq([
+        Assert(Txn.application_args.length() == Int(4)),
+        App.localPut(
+            Int(1),
+            Txn.application_args[1],
+            Txn.application_args[2]
+        ),
+        App.localPut(
+            Int(1),
+            Txn.application_args[2],
+            Btoi(Txn.application_args[3])
+        ),
+        Return(Int(1))
     ])
 
     # Checks whether the sender is creator.
-    is_creator = Txn.sender() == App.globalGet(Bytes("creator"))
+    is_creator = Txn.sender() == App.globalGet(creator)
 
     # Verfies that the application_id is 0, jumps to on_deployment.
     # Verifies that DeleteApplication is used and verifies that sender is creator.
@@ -26,8 +58,12 @@ def approval_program():
         [Txn.on_completion() == OnComplete.UpdateApplication,
          Return(Int(0))],  # block update
         [Txn.on_completion() == OnComplete.DeleteApplication, Return(is_creator)],
-        [Txn.on_completion() == OnComplete.CloseOut, Return(var_1)],
-        [Txn.on_completion() == OnComplete.OptIn, Return(var_1)]
+        [Txn.on_completion() == OnComplete.CloseOut, Return(Int(1))],
+        [Txn.on_completion() == OnComplete.OptIn, Return(Int(1))],
+        [Txn.application_args[0] == Bytes(
+            "set_income_benef_num"), set_income_benef_num],
+        [Txn.application_args[0] == Bytes(
+            "set_income_benef"), set_income_benef]
     )
 
     return program

@@ -8,17 +8,46 @@ const { executeTransaction } = require('./transfer/common');
 async function run(runtimeEnv, deployer) {
   const masterAccount = deployer.accountsByName.get('master-account');
   const john = deployer.accountsByName.get('john');
+  const elon = deployer.accountsByName.get('elon');
+  const alice = deployer.accountsByName.get('alice');
+  const bob = deployer.accountsByName.get('bob');
 
-  const algoTxnParams = {
-    type: types.TransactionType.TransferAlgo,
-    sign: types.SignType.SecretKey,
-    fromAccount: masterAccount,
-    toAccountAddr: john.addr,
-    amountMicroAlgos: 401000000, // 401 algos
-    payFlags: { note: 'funding account' },
-  };
+  const algoTxnGroup = [
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: john.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: elon.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: alice.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: bob.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+  ];
 
-  await executeTransaction(deployer, algoTxnParams); // fund john
+  await executeTransaction(deployer, algoTxnGroup); // fund john
 
   await deployer.deployApp(
     'nft_approval.py',
@@ -41,7 +70,10 @@ async function run(runtimeEnv, deployer) {
 
   try {
     await deployer.optInAccountToApp(masterAccount, appID, {}, {}); // opt-in to asc by master
-    await deployer.optInAccountToApp(john, appID, {}, {}); // opt-in to asc by john
+    await deployer.optInAccountToApp(john, appID, {}, {});
+    await deployer.optInAccountToApp(elon, appID, {}, {});
+    await deployer.optInAccountToApp(alice, appID, {}, {});
+    await deployer.optInAccountToApp(bob, appID, {}, {});
   } catch (e) {
     console.log(e);
     throw new Error(e);

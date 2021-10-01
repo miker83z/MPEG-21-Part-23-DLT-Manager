@@ -1,140 +1,401 @@
 filename: main_approval.py
-timestamp: 1632763251
-compiled: AiAFAAQFAgEmAgdjcmVhdG9yBXRvdGFsMRgiEkAALDEZIxJAACMxGSQSQAAWMRklEkAADDEZIQQSQAABACEEQyEEQzEAKGQSQyJDKDEAZyk2GgBnIQRD
-compiledHash: S7ZWT5ZLLUKA46TJCEQKC2MIENERPUYIJKVHY3ERD565TOS43BM6IDN2YM
-srcHash: 763068708
+timestamp: 1633111512
+compiled: AiAFAAQFAgEmCBRzZXRfaW5jb21lX2JlbmVmX251bRBzZXRfaW5jb21lX2JlbmVmEWJlbmVmaWNpYXJpZXNfbnVtB2NyZWF0b3IKY29udGVudFVyaQtjb250ZW50SGFzaAZ0b3RORlQSY29uY2F0ZW5hdGVkTkZUc0lEMRgiEkAAdjEZIxJAAG0xGSQSQABgMRklEkAAVjEZIQQSQABLNhoAKBJAACc2GgApEkAAAQAxGyMSQAABACEENhoBNhoCZiEENhoCNhoDF2YhBEMxGyUSQAABADEdIQQSQAABACEEKjYaARdmIQRDIQRDIQRDMQArZBJDIkMxGyMSQAABACsxAGcnBDYaAGcnBTYaAWcnBjYaAmcnBzYaA2chBEM=
+compiledHash: HJV2BEG4P3GNRIKOYNVEBVEKEMOYRPKHPEZ4RLMBX6OP6L7MJ5OUD3K5Q4
+srcHash: 1815176736
 tealCode: |
-  #pragma version 2
-  txn ApplicationID
-  int 0
-  ==
-  bnz main_l10
-  txn OnCompletion
-  int UpdateApplication
-  ==
-  bnz main_l9
-  txn OnCompletion
-  int DeleteApplication
-  ==
-  bnz main_l8
-  txn OnCompletion
-  int CloseOut
-  ==
-  bnz main_l7
-  txn OnCompletion
-  int OptIn
-  ==
-  bnz main_l6
-  err
-  main_l6:
-  int 1
-  return
-  main_l7:
-  int 1
-  return
-  main_l8:
-  txn Sender
-  byte "creator"
-  app_global_get
-  ==
-  return
-  main_l9:
-  int 0
-  return
-  main_l10:
-  byte "creator"
-  txn Sender
-  app_global_put
-  byte "total"
-  txna ApplicationArgs 0
-  app_global_put
-  int 1
-  return
+    #pragma version 2
+    txn ApplicationID
+    int 0
+    ==
+    bnz main_l20
+    txn OnCompletion
+    int UpdateApplication
+    ==
+    bnz main_l19
+    txn OnCompletion
+    int DeleteApplication
+    ==
+    bnz main_l18
+    txn OnCompletion
+    int CloseOut
+    ==
+    bnz main_l17
+    txn OnCompletion
+    int OptIn
+    ==
+    bnz main_l16
+    txna ApplicationArgs 0
+    byte "set_income_benef_num"
+    ==
+    bnz main_l11
+    txna ApplicationArgs 0
+    byte "set_income_benef"
+    ==
+    bnz main_l8
+    err
+    main_l8:
+    txn NumAppArgs
+    int 4
+    ==
+    bnz main_l10
+    err
+    main_l10:
+    int 1
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    app_local_put
+    int 1
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    btoi
+    app_local_put
+    int 1
+    return
+    main_l11:
+    txn NumAppArgs
+    int 2
+    ==
+    bnz main_l13
+    err
+    main_l13:
+    txn NumAccounts
+    int 1
+    ==
+    bnz main_l15
+    err
+    main_l15:
+    int 1
+    byte "beneficiaries_num"
+    txna ApplicationArgs 1
+    btoi
+    app_local_put
+    int 1
+    return
+    main_l16:
+    int 1
+    return
+    main_l17:
+    int 1
+    return
+    main_l18:
+    txn Sender
+    byte "creator"
+    app_global_get
+    ==
+    return
+    main_l19:
+    int 0
+    return
+    main_l20:
+    txn NumAppArgs
+    int 4
+    ==
+    bnz main_l22
+    err
+    main_l22:
+    byte "creator"
+    txn Sender
+    app_global_put
+    byte "contentUri"
+    txna ApplicationArgs 0
+    app_global_put
+    byte "contentHash"
+    txna ApplicationArgs 1
+    app_global_put
+    byte "totNFT"
+    txna ApplicationArgs 2
+    app_global_put
+    byte "concatenatedNFTsID"
+    txna ApplicationArgs 3
+    app_global_put
+    int 1
+    return
 base64ToBytes:
-  - 2
-  - 32
-  - 5
-  - 0
-  - 4
-  - 5
-  - 2
-  - 1
-  - 38
-  - 2
-  - 7
-  - 99
-  - 114
-  - 101
-  - 97
-  - 116
-  - 111
-  - 114
-  - 5
-  - 116
-  - 111
-  - 116
-  - 97
-  - 108
-  - 49
-  - 24
-  - 34
-  - 18
-  - 64
-  - 0
-  - 44
-  - 49
-  - 25
-  - 35
-  - 18
-  - 64
-  - 0
-  - 35
-  - 49
-  - 25
-  - 36
-  - 18
-  - 64
-  - 0
-  - 22
-  - 49
-  - 25
-  - 37
-  - 18
-  - 64
-  - 0
-  - 12
-  - 49
-  - 25
-  - 33
-  - 4
-  - 18
-  - 64
-  - 0
-  - 1
-  - 0
-  - 33
-  - 4
-  - 67
-  - 33
-  - 4
-  - 67
-  - 49
-  - 0
-  - 40
-  - 100
-  - 18
-  - 67
-  - 34
-  - 67
-  - 40
-  - 49
-  - 0
-  - 103
-  - 41
-  - 54
-  - 26
-  - 0
-  - 103
-  - 33
-  - 4
-  - 67
+    - 2
+    - 32
+    - 5
+    - 0
+    - 4
+    - 5
+    - 2
+    - 1
+    - 38
+    - 8
+    - 20
+    - 115
+    - 101
+    - 116
+    - 95
+    - 105
+    - 110
+    - 99
+    - 111
+    - 109
+    - 101
+    - 95
+    - 98
+    - 101
+    - 110
+    - 101
+    - 102
+    - 95
+    - 110
+    - 117
+    - 109
+    - 16
+    - 115
+    - 101
+    - 116
+    - 95
+    - 105
+    - 110
+    - 99
+    - 111
+    - 109
+    - 101
+    - 95
+    - 98
+    - 101
+    - 110
+    - 101
+    - 102
+    - 17
+    - 98
+    - 101
+    - 110
+    - 101
+    - 102
+    - 105
+    - 99
+    - 105
+    - 97
+    - 114
+    - 105
+    - 101
+    - 115
+    - 95
+    - 110
+    - 117
+    - 109
+    - 7
+    - 99
+    - 114
+    - 101
+    - 97
+    - 116
+    - 111
+    - 114
+    - 10
+    - 99
+    - 111
+    - 110
+    - 116
+    - 101
+    - 110
+    - 116
+    - 85
+    - 114
+    - 105
+    - 11
+    - 99
+    - 111
+    - 110
+    - 116
+    - 101
+    - 110
+    - 116
+    - 72
+    - 97
+    - 115
+    - 104
+    - 6
+    - 116
+    - 111
+    - 116
+    - 78
+    - 70
+    - 84
+    - 18
+    - 99
+    - 111
+    - 110
+    - 99
+    - 97
+    - 116
+    - 101
+    - 110
+    - 97
+    - 116
+    - 101
+    - 100
+    - 78
+    - 70
+    - 84
+    - 115
+    - 73
+    - 68
+    - 49
+    - 24
+    - 34
+    - 18
+    - 64
+    - 0
+    - 118
+    - 49
+    - 25
+    - 35
+    - 18
+    - 64
+    - 0
+    - 109
+    - 49
+    - 25
+    - 36
+    - 18
+    - 64
+    - 0
+    - 96
+    - 49
+    - 25
+    - 37
+    - 18
+    - 64
+    - 0
+    - 86
+    - 49
+    - 25
+    - 33
+    - 4
+    - 18
+    - 64
+    - 0
+    - 75
+    - 54
+    - 26
+    - 0
+    - 40
+    - 18
+    - 64
+    - 0
+    - 39
+    - 54
+    - 26
+    - 0
+    - 41
+    - 18
+    - 64
+    - 0
+    - 1
+    - 0
+    - 49
+    - 27
+    - 35
+    - 18
+    - 64
+    - 0
+    - 1
+    - 0
+    - 33
+    - 4
+    - 54
+    - 26
+    - 1
+    - 54
+    - 26
+    - 2
+    - 102
+    - 33
+    - 4
+    - 54
+    - 26
+    - 2
+    - 54
+    - 26
+    - 3
+    - 23
+    - 102
+    - 33
+    - 4
+    - 67
+    - 49
+    - 27
+    - 37
+    - 18
+    - 64
+    - 0
+    - 1
+    - 0
+    - 49
+    - 29
+    - 33
+    - 4
+    - 18
+    - 64
+    - 0
+    - 1
+    - 0
+    - 33
+    - 4
+    - 42
+    - 54
+    - 26
+    - 1
+    - 23
+    - 102
+    - 33
+    - 4
+    - 67
+    - 33
+    - 4
+    - 67
+    - 33
+    - 4
+    - 67
+    - 49
+    - 0
+    - 43
+    - 100
+    - 18
+    - 67
+    - 34
+    - 67
+    - 49
+    - 27
+    - 35
+    - 18
+    - 64
+    - 0
+    - 1
+    - 0
+    - 43
+    - 49
+    - 0
+    - 103
+    - 39
+    - 4
+    - 54
+    - 26
+    - 0
+    - 103
+    - 39
+    - 5
+    - 54
+    - 26
+    - 1
+    - 103
+    - 39
+    - 6
+    - 54
+    - 26
+    - 2
+    - 103
+    - 39
+    - 7
+    - 54
+    - 26
+    - 3
+    - 103
+    - 33
+    - 4
+    - 67

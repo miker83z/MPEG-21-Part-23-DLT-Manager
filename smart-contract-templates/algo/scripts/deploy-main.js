@@ -8,17 +8,64 @@ const { executeTransaction } = require('./transfer/common');
 
 async function run(runtimeEnv, deployer) {
   const masterAccount = deployer.accountsByName.get('master-account');
+  const john = deployer.accountsByName.get('john');
+  const elon = deployer.accountsByName.get('elon');
+  const alice = deployer.accountsByName.get('alice');
+  const bob = deployer.accountsByName.get('bob');
 
-  let appArgs = ['contentmcocel'].map(convert.stringToBytes);
+  const algoTxnGroup = [
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: john.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: elon.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: alice.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+    {
+      type: types.TransactionType.TransferAlgo,
+      sign: types.SignType.SecretKey,
+      fromAccount: masterAccount,
+      toAccountAddr: bob.addr,
+      amountMicroAlgos: 401000000, // 401 algos
+      payFlags: { note: 'funding account' },
+    },
+  ];
+
+  await executeTransaction(deployer, algoTxnGroup); // fund john
+
+  let appArgs = [
+    convert.stringToBytes('content'),
+    convert.stringToBytes('content_hash'),
+    convert.uint64ToBigEndian(1),
+    convert.stringToBytes('1|2|3|67|5'),
+  ];
 
   await deployer.deployApp(
     'main_approval.py',
     'main_clear_state.py',
     {
       sender: masterAccount,
-      localInts: 16,
-      globalInts: 1,
-      globalBytes: 63,
+      localInts: 8,
+      localBytes: 8,
+      globalInts: 3,
+      globalBytes: 61,
       appArgs: appArgs,
     },
     {}
@@ -33,6 +80,10 @@ async function run(runtimeEnv, deployer) {
 
   try {
     await deployer.optInAccountToApp(masterAccount, appID, {}, {}); // opt-in to asc by master
+    await deployer.optInAccountToApp(john, appID, {}, {});
+    await deployer.optInAccountToApp(elon, appID, {}, {});
+    await deployer.optInAccountToApp(alice, appID, {}, {});
+    await deployer.optInAccountToApp(bob, appID, {}, {});
   } catch (e) {
     console.log(e);
     throw new Error(e);

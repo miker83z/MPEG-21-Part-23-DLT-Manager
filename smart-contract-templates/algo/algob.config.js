@@ -16,7 +16,7 @@ let accounts = mkAccounts([
   },
   // Following accounts are generated using `algob gen-accounts`.
   {
-    name: 'elon-musk',
+    name: 'elon',
     addr: 'WHVQXVVCQAD7WX3HHFKNVUL3MOANX3BYXXMEEJEJWOZNRXJNTN7LTNPSTY',
     mnemonic:
       'resist derive table space jealous person pink ankle hint venture manual spawn move harbor flip cigar copy throw swap night series hybrid chest absent art',
