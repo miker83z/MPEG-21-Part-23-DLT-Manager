@@ -8,9 +8,34 @@ const mco = require('./example.json');
 const bindings = require('./bindings-algo.json');
 const mnemonic =
   'enforce drive foster uniform cradle tired win arrow wasp melt cattle chronic sport dinosaur announce shell correct shed amused dismiss mother jazz task above hospital';
+const john = AlgoDeployer.fromMnemonic(
+  'found empower message suit siege arrive dad reform museum cake evoke broom comfort fluid flower wheat gasp baby auction tuna sick case camera about flip'
+);
+const elon = AlgoDeployer.fromMnemonic(
+  'resist derive table space jealous person pink ankle hint venture manual spawn move harbor flip cigar copy throw swap night series hybrid chest absent art'
+);
+const alice = AlgoDeployer.fromMnemonic(
+  'brand globe reason guess allow wear roof leisure season coin own pen duck worth virus silk jazz pitch behave jazz leisure pave unveil absorb kick'
+);
+const bob = AlgoDeployer.fromMnemonic(
+  'caution fuel omit buzz six unique method kiwi twist afraid monitor song leader mask bachelor siege what shiver fringe else mass hero deposit absorb tooth'
+);
 
 const generate = () => {
   return generateSmartContractSpecification(mco);
+};
+
+const setupAlgo = async (deployer) => {
+  await deployer.pay(deployer.mainAddress, john.addr, 401000000);
+  await deployer.pay(deployer.mainAddress, elon.addr, 401000000);
+  await deployer.pay(deployer.mainAddress, alice.addr, 401000000);
+  await deployer.pay(deployer.mainAddress, bob.addr, 401000000);
+  const res = await deployer.deployToken();
+  const appId = res['application-index'];
+  await deployer.optInApp(appId, john);
+  await deployer.optInApp(appId, elon);
+  await deployer.optInApp(appId, alice);
+  await deployer.optInApp(appId, bob);
 };
 
 const deploy = async (smartContractSpecification) => {
@@ -29,6 +54,8 @@ const deploy = async (smartContractSpecification) => {
   );
   const mainAddr = AlgoDeployer.fromMnemonic(mnemonic);
   await deployer.setMainAddress(mainAddr);
+  //await setupAlgo(deployer);
+
   //const res = await deployer.deploySmartContracts();
   //return res.options.address;
 };
