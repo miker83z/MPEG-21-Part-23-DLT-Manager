@@ -6,8 +6,9 @@ const {
 } = require('./..');
 const mco = require('./example.json');
 const bindings = require('./bindings-algo.json');
-const mnemonic =
-  'enforce drive foster uniform cradle tired win arrow wasp melt cattle chronic sport dinosaur announce shell correct shed amused dismiss mother jazz task above hospital';
+const master = AlgoDeployer.fromMnemonic(
+  'enforce drive foster uniform cradle tired win arrow wasp melt cattle chronic sport dinosaur announce shell correct shed amused dismiss mother jazz task above hospital'
+);
 const john = AlgoDeployer.fromMnemonic(
   'found empower message suit siege arrive dad reform museum cake evoke broom comfort fluid flower wheat gasp baby auction tuna sick case camera about flip'
 );
@@ -30,12 +31,6 @@ const setupAlgo = async (deployer) => {
   await deployer.pay(deployer.mainAddress, elon.addr, 401000000);
   await deployer.pay(deployer.mainAddress, alice.addr, 401000000);
   await deployer.pay(deployer.mainAddress, bob.addr, 401000000);
-  const res = await deployer.deployToken();
-  const appId = res['application-index'];
-  await deployer.optInApp(appId, john);
-  await deployer.optInApp(appId, elon);
-  await deployer.optInApp(appId, alice);
-  await deployer.optInApp(appId, bob);
 };
 
 const deploy = async (smartContractSpecification) => {
@@ -52,12 +47,9 @@ const deploy = async (smartContractSpecification) => {
     smartContractSpecification,
     bindings
   );
-  const mainAddr = AlgoDeployer.fromMnemonic(mnemonic);
-  await deployer.setMainAddress(mainAddr);
+  await deployer.setMainAddress(master);
   //await setupAlgo(deployer);
-
-  //const res = await deployer.deploySmartContracts();
-  //return res.options.address;
+  return await deployer.deploySmartContracts([master, john, elon, alice, bob]);
 };
 
 const main = async () => {
