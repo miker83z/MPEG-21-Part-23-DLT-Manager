@@ -4,7 +4,7 @@ const {
   AlgoDeployer,
   AlgoParser,
 } = require('./..');
-const mco = require('./example.json');
+const mco = require('./example2.json');
 const bindings = require('./bindings-algo.json');
 const master = AlgoDeployer.fromMnemonic(
   'enforce drive foster uniform cradle tired win arrow wasp melt cattle chronic sport dinosaur announce shell correct shed amused dismiss mother jazz task above hospital'
@@ -52,13 +52,24 @@ const deploy = async (smartContractSpecification) => {
   return await deployer.deploySmartContracts([master, john, elon, alice, bob]);
 };
 
+const parse = async (appId, nftAppId) => {
+  const ipfs = new OffChainStorage();
+  const provider = {
+    apiToken:
+      'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    baseServer: 'http://localhost',
+    port: '4001',
+  };
+  const pars = new AlgoParser(provider, ipfs, master.addr, appId, nftAppId);
+  return await pars.parseSmartContract();
+};
+
 const main = async () => {
   const smartContractSpecification = generate();
-  const address = await deploy(smartContractSpecification);
-  //await sleep(2000);
-  //console.log('Parse');
-  //const res = await parse(address);
-  //console.log(res);
+  const [appId, nftAppId] = await deploy(smartContractSpecification);
+  await sleep(2000);
+  const res = await parse(appId, nftAppId); //80, 45);
+  console.log(res);
 };
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
