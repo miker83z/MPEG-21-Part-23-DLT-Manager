@@ -1,6 +1,6 @@
 {
-  "name": "ethereum-smart-contracts-for-media",
-  "version": "0.9.0",
+  "name": "scm-manager-generator",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
