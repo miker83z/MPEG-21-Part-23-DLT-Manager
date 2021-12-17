@@ -38,8 +38,9 @@ const deploy = async (smartContractSpecification) => {
   const provider = {
     apiToken:
       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-    baseServer: 'http://localhost',
-    port: '4001',
+    //baseServer: 'http://localhost',
+    baseServer: 'https://scm.linkeddata.es/algo/',
+    port: '443',
   };
   const deployer = new AlgoDeployer(
     provider,
@@ -48,7 +49,7 @@ const deploy = async (smartContractSpecification) => {
     bindings
   );
   await deployer.setMainAddress(master);
-  //await setupAlgo(deployer);
+  await setupAlgo(deployer);
   return await deployer.deploySmartContracts([master, john, elon, alice, bob]);
 };
 
@@ -65,9 +66,13 @@ const parse = async (appId, nftAppId) => {
 };
 
 const main = async () => {
+  console.log(master.addr);
   const smartContractSpecification = generate();
+  console.log(smartContractSpecification);
   const [appId, nftAppId] = await deploy(smartContractSpecification);
+  console.log(appId, nftAppId);
   await sleep(2000);
+  console.log('||||||||||||| Backward |||||||||||||');
   const res = await parse(appId, nftAppId); //80, 45);
   console.log(res);
 };
