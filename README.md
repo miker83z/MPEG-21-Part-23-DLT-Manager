@@ -1,6 +1,8 @@
 # MPEG-21-Part-23 Smart Contract for Media (DLT-Manager)
 Panos Kudumakis, Mirko Zichichi, Víctor Rodríguez-Doncel, Marina Ljubojevic, Mohamed Allouche, Alexandre Moreaux and Mihai Mitra
 
+[**Demo**](https://scm.linkeddata.es) - [**MPEG Whitepaper**](https://www.mpeg.org/wp-content/uploads/mpeg_meetings/138_OnLine/w21537.zip)
+
 ## Abstract
 In the last few years, MPEG has developed a set of standardized RDF ontologies and XML schemas for codifying intellectual property (IP) rights information related to music and media. ISO/IEC 21000-19 Media Value Chain Ontology (MVCO) facilitates rights tracking for fair, timely, and transparent payment of royalties by capturing user roles and their permissible actions on a particular IP entity. ISO/IEC 21000-19/AMD1 Audio Value Chain Ontology (AVCO) extends MVCO functionality related to describing IP entities in the audio domain, e.g., multitrack audio and time segments. ISO/IEC 21000-21 (2nd Ed) Media Contract Ontology (MCO) facilitates the conversion of narrative contracts to digital ones related to exploiting IP rights, payments, and notifications. For the latter, XML schemas have been developed as ISO/IEC 21000-20 (2nd Ed) Contract Expression Language (CEL). 
 Furthermore, the axioms in these XML schemas and RDF ontologies can drive the execution of rights-related workflows in controlled environments, e.g., Distributed Ledger Technologies (DLTs), where transparency and interoperability are favored for fair trade of music and media. Thus, the aim of **ISO/IEC 21000-23 Smart Contracts for Media** is to provide the means (e.g., APIs) for converting these XML and RDF media contracts to smart contracts that can be executed on existing DLT environments. 
