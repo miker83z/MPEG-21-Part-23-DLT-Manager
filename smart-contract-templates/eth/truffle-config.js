@@ -18,13 +18,13 @@
  *
  */
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const fs = require('fs');
-const secret = fs.readFileSync('.secret').toString();
-const infuraKey = secret.substr(0, secret.indexOf(' '));
-const mnemonic = secret.substr(secret.indexOf(' ')).trim();
-const ropstenProvider = () =>
-  new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/` + infuraKey);
+//const HDWalletProvider = require('@truffle/hdwallet-provider');
+//const fs = require('fs');
+//const secret = fs.readFileSync('.secret').toString();
+//const infuraKey = secret.substr(0, secret.indexOf(' '));
+//const mnemonic = secret.substr(secret.indexOf(' ')).trim();
+//const ropstenProvider = () =>
+//  new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/` + infuraKey);
 //const ropstenProvider = {};
 
 module.exports = {
@@ -62,14 +62,14 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
-    ropsten: {
-      provider: ropstenProvider,
-      network_id: 3, // Ropsten's id
-      gas: 5500000, // Ropsten has a lower block limit than mainnet
-      confirmations: 2, // # of confs to wait between deployments. (default: 0)
-      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
-    },
+    //ropsten: {
+    //  provider: ropstenProvider,
+    //  network_id: 3, // Ropsten's id
+    //  gas: 5500000, // Ropsten has a lower block limit than mainnet
+    //  confirmations: 2, // # of confs to wait between deployments. (default: 0)
+    //  timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+    //  skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+    //},
     // Useful for private networks
     // private: {
     // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
@@ -86,7 +86,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: '0.8.3', // Fetch exact version from solc-bin (default: truffle's version)
+      version: '^0.8.0', // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
